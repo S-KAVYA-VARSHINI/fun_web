@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Who's Coming? 🎉</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Fredoka:wght@400;500;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Fredoka', sans-serif;
+    overflow-x: hidden;
+
+    background:
+        radial-gradient(circle at 10% 20%, #ff9de2 0%, transparent 25%),
+        radial-gradient(circle at 90% 10%, #8ee7ff 0%, transparent 25%),
+        radial-gradient(circle at 80% 90%, #ffe27a 0%, transparent 25%),
+        linear-gradient(135deg, #ffd6f6, #c9f7ff, #fff1b8);
+
+    padding: 40px 20px;
+}
+
+/* Floating decorations */
+
+.decoration {
+    position: fixed;
+    pointer-events: none;
+    z-index: 0;
+    animation: float 4s ease-in-out infinite;
+}
+
+.star1 {
+    top: 8%;
+    left: 7%;
+    font-size: 42px;
+}
+
+.star2 {
+    top: 18%;
+    right: 8%;
+    font-size: 35px;
+    animation-delay: 1s;
+}
+
+.star3 {
+    bottom: 12%;
+    left: 8%;
+    font-size: 38px;
+    animation-delay: 2s;
+}
+
+.star4 {
+    bottom: 8%;
+    right: 10%;
+    font-size: 45px;
+    animation-delay: .5s;
+}
+
+@keyframes float {
+    0%,100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-18px) rotate(10deg);
+    }
+}
+
+/* Main container */
+
+.container {
+    width: 100%;
+    max-width: 850px;
+    margin: auto;
+    position: relative;
+    z-index: 2;
+}
+
+/* Header */
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.small-title {
+    display: inline-block;
+    background: #ffffff;
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #ff4fa3;
+    box-shadow: 0 8px 20px rgba(0,0,0,.08);
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-family: 'Baloo 2', cursive;
+    font-size: clamp(48px, 8vw, 82px);
+    line-height: .9;
+    color: #30235c;
+
+    text-shadow:
+        4px 4px 0 #ffffff,
+        7px 7px 0 rgba(255, 79, 163, .25);
+}
+
+.subtitle {
+    margin-top: 15px;
+    font-size: 18px;
+    color: #594c73;
+}
+
+/* Main card */
+
+.event-card {
+    background: rgba(255,255,255,.88);
+    backdrop-filter: blur(15px);
+
+    border: 4px solid white;
+    border-radius: 35px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 25px 60px rgba(74, 48, 110, .15);
+
+    position: relative;
+}
+
+/* Event banner */
+
+.event-banner {
+    border-radius: 25px;
+    padding: 25px;
+
+    background: linear-gradient(
+        135deg,
+        #ff75bd,
+        #a66cff,
+        #62d9ff
+    );
+
+    color: white;
+    margin-bottom: 25px;
+
+    position: relative;
+    overflow: hidden;
+}
+
+.event-banner::after {
+    content: "✨ 🎈 🎉 ✨";
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 25px;
+}
+
+.event-banner h2 {
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+.event-banner p {
+    opacity: .9;
+}
+
+/* Counter */
+
+.counter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: #fff4fb;
+    border-radius: 18px;
+
+    padding: 14px 18px;
+    margin-bottom: 20px;
+
+    font-weight: 600;
+}
+
+.counter-number {
+    color: #ff4fa3;
+    font-size: 20px;
+}
+
+/* People list */
+
+.people {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* Person */
+
+.person {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    padding: 16px 18px;
+
+    border-radius: 20px;
+
+    background: #ffffff;
+
+    border: 3px solid transparent;
+
+    transition: .25s ease;
+
+    box-shadow: 0 6px 15px rgba(0,0,0,.05);
+}
+
+.person:hover {
+    transform: translateY(-3px) rotate(-.5deg);
+    box-shadow: 0 10px 22px rgba(0,0,0,.09);
+}
+
+/* Different card colours */
+
+.person:nth-child(1) {
+    border-color: #ffb3d9;
+    background: #fff5fa;
+}
+
+.person:nth-child(2) {
+    border-color: #9de8ff;
+    background: #f1fcff;
+}
+
+.person:nth-child(3) {
+    border-color: #c5a8ff;
+    background: #f8f4ff;
+}
+
+.person:nth-child(4) {
+    border-color: #ffe083;
+    background: #fffcef;
+}
+
+.person:nth-child(5) {
+    border-color: #9de6bd;
+    background: #f1fff7;
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 23px;
+
+    background: white;
+
+    box-shadow: 0 5px 12px rgba(0,0,0,.1);
+}
+
+.name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #35284f;
+
+    flex: 1;
+}
+
+/* Checkbox */
+
+.check {
+    width: 30px;
+    height: 30px;
+
+    border-radius: 10px;
+
+    border: 3px solid #d9cde9;
+
+    background: white;
+
+    cursor: pointer;
+
+    appearance: none;
+
+    position: relative;
+
+    transition: .2s;
+}
+
+.check:hover {
+    transform: scale(1.1);
+}
+
+.check:checked {
+    background: #65d99b;
+    border-color: #65d99b;
+}
+
+.check:checked::after {
+    content: "✓";
+
+    position: absolute;
+
+    color: white;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    left: 4px;
+    top: -1px;
+}
+
+/* THE SPECIAL PERSON */
+
+.runaway {
+    border: 3px dashed #ff69b4 !important;
+
+    background: linear-gradient(
+        90deg,
+        #fff0f8,
+        #fff8fb
+    ) !important;
+
+    cursor: pointer;
+
+    transition:
+        left .25s ease,
+        top .25s ease,
+        transform .25s ease;
+}
+
+.runaway .name {
+    color: #ff4fa3;
+    font-weight: 800;
+}
+
+.runaway::before {
+    content: "⚠️ suspicious";
+    position: absolute;
+
+    top: -10px;
+    right: 20px;
+
+    background: #ff69b4;
+    color: white;
+
+    padding: 3px 9px;
+
+    border-radius: 20px;
+
+    font-size: 10px;
+}
+
+/* Funny message */
+
+.message {
+    text-align: center;
+
+    min-height: 32px;
+
+    margin-top: 20px;
+
+    color: #ff4fa3;
+
+    font-weight: 700;
+
+    font-size: 16px;
+}
+
+/* Footer */
+
+.footer {
+    text-align: center;
+    margin-top: 25px;
+
+    color: #746785;
+    font-size: 13px;
+}
+
+.footer span {
+    color: #ff4fa3;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 25px 12px;
+    }
+
+    .event-card {
+        padding: 18px;
+        border-radius: 25px;
+    }
+
+    .event-banner {
+        padding: 20px;
+    }
+
+    .event-banner::after {
+        display: none;
+    }
+
+    .person {
+        padding: 13px;
+    }
+
+    .avatar {
+        width: 42px;
+        height: 42px;
+        font-size: 19px;
+    }
+
+    .name {
+        font-size: 16px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Floating decorations -->
+
+<div class="decoration star1">⭐</div>
+<div class="decoration star2">✨</div>
+<div class="decoration star3">🌈</div>
+<div class="decoration star4">💫</div>
+
+
+<div class="container">
+
+    <div class="header">
+
+        <div class="small-title">
+            🎟️ OFFICIAL ATTENDANCE FORM
+        </div>
+
+        <h1>
+            Who's Coming?
+        </h1>
+
+        <p class="subtitle">
+            Check your name if you're ready to party! 🎉
+        </p>
+
+    </div>
+
+
+    <div class="event-card">
+
+        <div class="event-banner">
+
+            <h2>🎊 The Ultimate Event</h2>
+
+            <p>
+                One checklist. Many attendees.
+                One suspicious attendee...
+            </p>
+
+        </div>
+
+
+        <div class="counter">
+
+            <span>
+                👥 Attendance
+            </span>
+
+            <span class="counter-number">
+                <span id="count">0</span> / 5
+            </span>
+
+        </div>
+
+
+        <div class="people">
+
+            <div class="person">
+
+                <div class="avatar">🧑🏻</div>
+
+                <div class="name">
+                    Rahul
+                </div>
+
+                <input
+                    type="checkbox"
+                    class="check normal"
+                >
+
+            </div>
+
+
+            <div class="person">
+
+                <div class="avatar">👩🏻</div>
+
+                <div class="name">
+                    Priya
+                </div>
+
+                <input
+                    type="checkbox"
+                    class="check normal"
+                >
+
+            </div>
+
+
+            <div class="person">
+
+                <div class="avatar">🧑🏽</div>
+
+                <div class="name">
+                    Arjun
+                </div>
+
+                <input
+                    type="checkbox"
+                    class="check normal"
+                >
+
+            </div>
+
+
+            <div class="person">
+
+                <div class="avatar">👩🏽</div>
+
+                <div class="name">
+                    Meena
+                </div>
+
+                <input
+                    type="checkbox"
+                    class="check normal"
+                >
+
+            </div>
+
+
+            <!-- THE RUNAWAY -->
+
+            <div
+                class="person runaway"
+                id="runaway"
+            >
+
+                <div class="avatar">
+                    😈
+                </div>
+
+                <div class="name">
+                    Kavya Varshini
+                </div>
+
+                <input
+                    type="checkbox"
+                    class="check"
+                    id="kavyaCheck"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="message"
+            id="message"
+        >
+        </div>
+
+    </div>
+
+
+    <div class="footer">
+        Made with <span>💖</span>, questionable decisions &
+        a runaway attendee.
+    </div>
+
+</div>
+
+
+<script>
+
+/* Normal checkbox counter */
+
+const normalChecks =
+    document.querySelectorAll('.normal');
+
+const count =
+    document.getElementById('count');
+
+function updateCount() {
+
+    let checked = 0;
+
+    normalChecks.forEach(box => {
+
+        if (box.checked) {
+            checked++;
+        }
+
+    });
+
+    const kavya =
+        document.getElementById('kavyaCheck');
+
+    if (kavya.checked) {
+        checked++;
+    }
+
+    count.textContent = checked;
+}
+
+normalChecks.forEach(box => {
+
+    box.addEventListener(
+        'change',
+        updateCount
+    );
+
+});
+
+
+/* RUNAWAY NAME */
+
+const runaway =
+    document.getElementById('runaway');
+
+const message =
+    document.getElementById('message');
+
+const kavyaCheck =
+    document.getElementById('kavyaCheck');
+
+const messages = [
+
+    "NOPE. She's not ready yet. 🏃‍♀️💨",
+
+    "You thought you could catch her? 😂",
+
+    "Kavya has left the chat. 🚪",
+
+    "Almost! Try again! 😭",
+
+    "She's REALLY committed to not attending. 💀",
+
+    "STOP CHASING HER 😂",
+
+    "Kavya.exe has escaped. 🤖💨"
+
+];
+
+let attempts = 0;
+
+
+/* Desktop */
+
+runaway.addEventListener(
+    'mouseenter',
+    escape
+);
+
+
+/* Mobile / click */
+
+runaway.addEventListener(
+    'touchstart',
+    escape
+);
+
+runaway.addEventListener(
+    'click',
+    escape
+);
+
+
+function escape() {
+
+    attempts++;
+
+    message.textContent =
+        messages[
+            attempts % messages.length
+        ];
+
+    const maxX =
+        window.innerWidth - runaway.offsetWidth - 20;
+
+    const maxY =
+        window.innerHeight - runaway.offsetHeight - 20;
+
+    const x =
+        Math.max(10, Math.random() * maxX);
+
+    const y =
+        Math.max(10, Math.random() * maxY);
+
+    runaway.style.position = 'fixed';
+
+    runaway.style.left = x + 'px';
+
+    runaway.style.top = y + 'px';
+
+    runaway.style.zIndex = '9999';
+
+    runaway.style.transform =
+        `rotate(${Math.random() * 20 - 10}deg)`;
+
+}
+
+
+/* If somehow caught */
+
+kavyaCheck.addEventListener(
+    'change',
+    function() {
+
+        if (this.checked) {
+
+            message.textContent =
+                "WAIT... YOU ACTUALLY CAUGHT HER?! 😱🎉";
+
+            updateCount();
+
+            setTimeout(() => {
+
+                message.textContent =
+                    "Okay fine. Kavya is attending. 😂";
+
+            }, 2000);
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
